@@ -34,70 +34,75 @@ public class Main {
 
         Node result = GreedyBFS.greedyBestFirstSearch(nodeA);
         Node result2 = AStarSearch.aStarSearch(nodeA);
-        if (result == null) {
+        if (result == null || result2 == null) {
             System.out.println("No goal node found.");
         }
 
-        TreeNode root = new TreeNode(true); // Root is a maximizer
 
-        TreeNode level1Child1 = new TreeNode(false);
-        TreeNode level1Child2 = new TreeNode(false);
+        TreeNode root2 = new TreeNode(true);
 
-        root.addChild(level1Child1);
-        root.addChild(level1Child2);
+        TreeNode c1 = new TreeNode(false);
+        TreeNode c2 = new TreeNode(false);
 
-
-        TreeNode leaf1 = new TreeNode(false); // Minimizer at the leaf level
-        leaf1.setValue(3); // Leaf node with score
-        TreeNode leaf2 = new TreeNode(false);
-        leaf2.setValue(5);
-
-        level1Child1.addChild(leaf1);
-        level1Child1.addChild(leaf2);
+        root2.addChild(c1);
+        root2.addChild(c2);
 
 
-        TreeNode intermediate = new TreeNode(true); // Maximizer intermediate node
-        level1Child2.addChild(intermediate);
-        TreeNode deepLeaf1 = new TreeNode(false);
-        deepLeaf1.setValue(2);
-        TreeNode deepLeaf2 = new TreeNode(false);
-        deepLeaf2.setValue(9);
-        intermediate.addChild(deepLeaf1);
-        intermediate.addChild(deepLeaf2);
+        TreeNode c11 = new TreeNode(true);
+        TreeNode c12 = new TreeNode(true);
+
+        c1.addChild(c11);
+        c1.addChild(c12);
+
+        TreeNode c111 = new TreeNode(10);
+        TreeNode c112 = new TreeNode(5);
+        TreeNode c121 = new TreeNode(7);
+        TreeNode c122 = new TreeNode(11);
+
+        c11.addChild(c111);
+        c11.addChild(c112);
+        c12.addChild(c121);
+        c12.addChild(c122);
 
 
-        int optimalValue = MinimaxAlgorithm.minimax(root, 0, root.isMaximizer);
-        System.out.println("Optimal value calculated by Minimax: " + optimalValue);
+        TreeNode c21 = new TreeNode(true);
+        TreeNode c22 = new TreeNode(true);
+
+        c2.addChild(c11);
+        c2.addChild(c12);
+
+        TreeNode c211 = new TreeNode(5);
+        TreeNode c212 = new TreeNode(12);
+        TreeNode c221 = new TreeNode(11);
+        TreeNode c222 = new TreeNode(12);
+
+        c21.addChild(c211);
+        c21.addChild(c212);
+        c22.addChild(c221);
+        c22.addChild(c222);
+/*
+           (root2, Max)
+           /          \
+     (c1, Min)          (c2, Min)
+    /    \                  /    \
+(c11, Max) (c12, Max)  (c21, Max) (c22, Max)
+ /    \     /    \     /    \     /    \
+[10]  [5]  [7]  [11]  [5]  [12]  [11]  [12]
+*/
 
 
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter string with brackets: ");
-        Stack stack = new Stack();
-        String input = sc.nextLine();
+
+        MinimaxAlgorithm.Result result4 = MinimaxAlgorithm.alphaBetaPruning(root2, 0, Integer.MIN_VALUE, Integer.MAX_VALUE, true);
+        System.out.println("Best value: " + result4.value);
+        System.out.println("Pruning occurred: " + result4.pruningOccurred);
 
 
-        for (int i = 0; i < input.length(); i++) {
-            char token = input.charAt(i);
-            if (token == '{') {
-                stack.push(token);
-            }
-            else if(token == '}') {
-                if (stack.isEmpty()) {
-                    System.out.println("false");
-                    return;
-                }
-                else {
-                    stack.pop();
-                }
-            }
-        }
-        System.out.println(stack.isEmpty());
 
-//{{{}}}
 
 
 
     }
+
 }
 
 
