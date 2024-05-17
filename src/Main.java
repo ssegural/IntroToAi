@@ -17,20 +17,20 @@ public class Main {
         Node nodeL = new Node("L", 8);
         Node nodeM = new Node("M", 0);
 
-        nodeA.addNeighbor(nodeB,1);
-        nodeA.addNeighbor(nodeC,1);
-        nodeB.addNeighbor(nodeE,1);
-        nodeB.addNeighbor(nodeD,1);
-        nodeE.addNeighbor(nodeJ,1);
-        nodeE.addNeighbor(nodeI,1);
-        nodeD.addNeighbor(nodeI,1);
-        nodeD.addNeighbor(nodeH,1);
-        nodeC.addNeighbor(nodeF,1);
-        nodeC.addNeighbor(nodeG,1);
-        nodeG.addNeighbor(nodeJ,1);
-        nodeG.addNeighbor(nodeK,1);
-        nodeK.addNeighbor(nodeL,1);
-        nodeL.addNeighbor(nodeM,1);
+        nodeA.addNeighbor(nodeB, 1, false);
+        nodeA.addNeighbor(nodeC, 1, false);
+        nodeB.addNeighbor(nodeE, 1, false);
+        nodeB.addNeighbor(nodeD, 1, false);
+        nodeE.addNeighbor(nodeJ, 1, false);
+        nodeE.addNeighbor(nodeI, 1, false);
+        nodeD.addNeighbor(nodeI, 1, false);
+        nodeD.addNeighbor(nodeH, 1, false);
+        nodeC.addNeighbor(nodeF, 1, false);
+        nodeC.addNeighbor(nodeG, 1, false);
+        nodeG.addNeighbor(nodeJ, 1, false);
+        nodeG.addNeighbor(nodeK, 1, false);
+        nodeK.addNeighbor(nodeL, 1, false);
+        nodeL.addNeighbor(nodeM, 1, false);
 
         Node result = GreedyBFS.greedyBestFirstSearch(nodeA);
         Node result2 = AStarSearch.aStarSearch(nodeA);
